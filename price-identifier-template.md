@@ -4,70 +4,43 @@
 
 | UMIP                |                                                               |
 | ------------------- | ------------------------------------------------------------- |
-| UMIP Title          | Add **Price Identifier Name** as a supported price identifier |
-| Authors             | **Name**                                                      |
+| UMIP Title          | Add DIGG Positive Rebases as a supported price identifier     |
+| Authors             | Jon (BadgerDAO)                                         |
 | Status              | Draft                                                         |
-| Created             | **Today's Date**                                              |
+| Created             | 4/27/2021                                             |
 | Discourse Link      | **Create a post in [UMA's Discourse](https://discourse.umaproject.org/c/umips/18) and link here**            |
 
 # Summary 
 
-The DVM should support price requests for **Price Identifier Name**. **Price Identifier Name** reflects the **Summary of Price Identifier**.
+The DVM should support price requests for total DIGG Positive Rebases in a set timeframe. A DIGG Positive Rebase can be determined if the total supply of DIGG (https://etherscan.io/token/0x798d1be841a82a273720ce31c822c61a67a601c3) increased from one day to the next.
 
 
 # Motivation
 
-*Please explain why you want to add this price identifier. What types of synthetics are you intending to create with this?*
+We would like this identifier added so that we can distriute positive rebase options as a mechanism to help support the stability of DIGG.  More details on the campaign can be found in this post:
+https://medium.com/badgerdao/badgerdao-x-uma-introducing-rebase-mining-3c663a5abdce
 
 # Data Specifications
 
-*How should voters access the data necessary to calculate the value of this price identifier? What specific markets or data sources should be referenced?*
-
-*If proposing multiple price identifiers, please add markets or other data sources for each.*
-
 -----------------------------------------
-- Price identifier name: **First Price ID Name** 
-- Markets & Pairs: **Markets & Pairs** - *Example: Binance ETH/USDT, Coinbase Pro ETH/USD. This might not apply to all price identifiers*
-- Example data providers: **Provider to use** - *Cryptowatch, TraderMade, Quandl, the Graph*
-- Cost to use: **Explanation or link to provider pricing plan**
-- Real-time data update frequency: **Frequency** - *60 seconds*
-- Historical data update frequency: **Frequency** - *5 minutes*
+- Price identifier name: **Rebase_Pos_DIGG_30d_Jun0721** 
+- Markets & Pairs: **N/A**
+- Example data providers: **Available on-chain** 
+- Cost to use: **None**
+- Real-time data update frequency: **Daily** 
+- Historical data update frequency: **Daily** 
 
 # Price Feed Implementation
 
-*To allow for the creation of bots that can programmatically calculate prices off-chain to liquidate and dispute transactions, you must create a price feed following the UMA Protocol format (outlined below). This price feed is also necessary to calculate developer mining rewards.*
-
-*If using existing price feeds from the [UMA protocol repo](https://github.com/UMAprotocol/protocol/tree/master/packages/financial-templates-lib/src/price-feed), please list the price feeds used and write a price feed configuration following the examples [here](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/DefaultPriceFeedConfigs.js).*
-
-
-Existing price feeds include: (*Please remove before submission*)
-- [Balancer](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/BalancerPriceFeed.js)
-- [Uniswap/SushiSwap](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/UniswapPriceFeed.js)
-- [CoinGecko](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/CoinGeckoPriceFeed.js)
-- [CoinMarketCap](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/CoinMarketCapPriceFeed.js)
-- [CryptoWatch](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/CryptoWatchPriceFeed.js)
-- [DefiPulse](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/DefiPulsePriceFeed.js)
-- [TraderMade Forex rates](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/TraderMadePriceFeed.js)
-- [ExchangeRate Forex rates](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/ForexDailyPriceFeed.js)
-- [LP tokens](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/LPPriceFeed.js)
-- [Vault tokens](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/VaultPriceFeed.js)
-- [Quandl](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/QuandlPriceFeed.js)
-- [Any combination of these](https://github.com/UMAprotocol/protocol/blob/master/packages/financial-templates-lib/src/price-feed/ExpressionPriceFeed.js)
+At 12:00 UTC every day compare the total supply of DIGG (https://etherscan.io/token/0x798d1be841a82a273720ce31c822c61a67a601c3) to its supply from the previous day.  If it is greater than the previous day then the price feed should iterate by 1.  For the purpose of this version of the opions the possible values for this price feed to return at the time of maturity will be between 0 and 30
 
 # Technical Specifications
 
-*If proposing multiple price identifiers, please add technical specifications for each.*
 
------------------------------------------
-- Price identifier name: **First Price ID Name** - *ETHUSD*
-- Base Currency: **BASE** - *ETH - May not apply if this is not a typical Base/Quote price*
-- Quote Currency: **QUOTE** - *USD - May not apply if this is not a typical Base/Quote price*
-- Rounding: *Round to 2 decimal places (third decimal place digit >= 5 rounds up and < 5 rounds down)*
-- Estimated current value of price identifier: *15.03*
 
 # Rationale
 
-*The section should describe why price identifier design decisions were made, as well as any alternative designs that were considered.*
+I think comparing total supply one day to the other is the easiest but am open to other ways to implement this.
 
 # Implementation
 
@@ -75,9 +48,4 @@ Existing price feeds include: (*Please remove before submission*)
 
 # Security Considerations
 
-Some optional questions to consider: (*Please remove before submission*)
-- How could pricing data manipulation occur?
-- How could this price ID be exploited?
-- Do the instructions for determining the price provide people with enough certainty?
-- What are current or future concern possibilities with the way the price identifier is defined?
-- Are there any concerns around if the price identifier implementation is deterministic?
+None
