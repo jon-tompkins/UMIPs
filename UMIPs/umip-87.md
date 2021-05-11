@@ -38,11 +38,11 @@ min(if(r<5,0,((r-5)/(30-5))^1.5),1)
 https://docs.google.com/spreadsheets/d/1Kb58KUiaCFClfL9hkf0OCXJzXHC-9lDwnrxQ3eEobg4/edit?usp=sharing
 
 **Example Outputs**
-Positive Rebases  % of the Pool
-3                 0%
-8                 4.16%
-22                56.07%
-30                100%
+| Positive Rebases  | % of the Pool |
+| 3                 | 0%        |
+| 8                 | 4.16%     | 
+| 22                | 56.07%    |
+| 30                | 100%      |
 
 
 # Technical Specifications
